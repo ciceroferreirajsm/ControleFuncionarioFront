@@ -1,0 +1,61 @@
+.detalles-container {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.detalhes-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+}
+
+.detalhes-card p {
+  margin: 10px 0;
+}
+
+.detalhes-card input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.btn-atualizar, .btn-voltar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.btn-atualizar:hover, .btn-voltar:hover {
+  background-color: #0056b3;
+}
+.detalhes-card input[type="checkbox"] {
+  width: auto;
+  margin-top: 5px;
+}

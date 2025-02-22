@@ -1,0 +1,150 @@
+/* Container principal */
+.App {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 1s ease-in;
+}
+
+/* Animação de fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título centralizado */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 2rem;
+  animation: slideIn 0.8s ease-out;
+}
+
+/* Animação de slide in */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Formulário com layout flexível em duas colunas */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Cada grupo de input ocupa cerca de 50% da largura disponível */
+.input-group {
+  flex: 1 1 calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container para as senhas, deixando-as lado a lado */
+.senha-group {
+  display: flex;
+  gap: 20px;
+  flex: 1 1 100%;
+}
+
+/* Labels com margem inferior */
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Inputs e selects com transição */
+.input-group input,
+.input-group select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco nos inputs */
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: red;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Botão de envio ocupa 100% da linha */
+button[type="submit"] {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  flex: 1 1 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover para botão de envio */
+button[type="submit"]:hover {
+  background-color: #218838;
+  transform: translateY(-3px);
+}
+
+/* Botão de voltar */
+.back-button {
+  background-color: #ccc;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover para botão de voltar */
+.back-button:hover {
+  background-color: #bbb;
+  transform: translateY(-3px);
+}
+
+/* Em telas menores, empilha os elementos */
+@media (max-width: 768px) {
+  form {
+    flex-direction: column;
+  }
+  .input-group {
+    flex: 1 1 100%;
+  }
+  .senha-group {
+    flex-direction: column;
+  }
+}
