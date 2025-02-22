@@ -22,15 +22,21 @@ const Login = () => {
       setError("Por favor, preencha todos os campos.");
       return;
     }
-  
-    fetch("https://localhost:7140/api/Login/logar", {
+    const urlDocker = "https://localhost:65124/api/Login/logar";
+    const url = "https://localhost:7140/api/Login/logar";
+    fetch(urlDocker, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, senha }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Credenciais inválidas. Verifique seu email e senha.");
+        }
+        return response.json();
+      })
       .then((data) => {
         localStorage.setItem("token", data.token);
         navigate("/ListarFuncionarios");
@@ -38,6 +44,7 @@ const Login = () => {
       .catch((error) => {
         setError(error.message);
       });
+    
   };
   
   const handleRegisterSubmit = (e) => {
@@ -47,8 +54,9 @@ const Login = () => {
       setError("Por favor, preencha todos os campos.");
       return;
     }
-
-    fetch("https://localhost:7140/api/Login/registrar", {
+    const urlDocker = "https://localhost:65124/api/Login/registrar";
+    const url = "https://localhost:7140/api/Login/registrar";
+    fetch(urlDocker, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

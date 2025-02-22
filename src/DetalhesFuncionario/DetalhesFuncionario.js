@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Para acessar o ID da URL e navegar
-import "./DetalhesFuncionario.css"; // Adicione um arquivo CSS para estilizar
+import { useParams, useNavigate } from "react-router-dom";
+import "./DetalhesFuncionario.css"; 
 
 const DetalhesFuncionario = () => {
-  const { id } = useParams(); // Pega o id da URL
+  const { id } = useParams(); 
   const [funcionario, setFuncionario] = useState(null);
-  const [mensagem, setMensagem] = useState(""); // Estado para armazenar a mensagem da API
+  const [mensagem, setMensagem] = useState(""); 
   const [formData, setFormData] = useState({
     nome: "",
     sobrenome: "",
@@ -23,7 +23,9 @@ const DetalhesFuncionario = () => {
     if (!token) {
       navigate("/login"); 
     } else {
-      fetch(`https://localhost:7140/api/Funcionario/${id}`, {
+      const urlDocker = `https://localhost:65124/api/Funcionario/${id}`;
+      const url = `https://localhost:7140/api/Funcionario/${id}`;
+      fetch(urlDocker, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`, 
@@ -76,13 +78,34 @@ const DetalhesFuncionario = () => {
 
     const token = localStorage.getItem("token"); 
 
+    if (!formData.dtNascimento) {
+      setMensagem("Informe a data de nascimento.");
+      return;
+    }
+    const birthDate = new Date(formData.dtNascimento);
+    if (isNaN(birthDate.getTime())) {
+      setMensagem("Data de nascimento inválida.");
+      return;
+    }
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      setMensagem("O funcionário deve ser maior de 18 anos.");
+      return;
+    }
+
     if (!token) {
       setMensagem("Usuário não autenticado. Redirecionando para login...");
       setTimeout(() => navigate("/login"), 2000); 
       return;
     }
-
-    fetch(`https://localhost:7140/api/Funcionario/${id}`, {
+    const urlDocker = `https://localhost:65124/api/Funcionario/${id}`;
+    const url = `https://localhost:7140/api/Funcionario/${id}`;
+    fetch(urlDocker, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${token}`,

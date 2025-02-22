@@ -37,7 +37,9 @@ const CadastrarLogin = () => {
     }
 
     try {
-      const response = await fetch("https://localhost:7140/api/Login/registrar", {
+      const urlDocker = "https://localhost:65124/api/Login/registrar";
+      const url = "https://localhost:7140/api/Login/registrar";
+      const response = await fetch(urlDocker, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

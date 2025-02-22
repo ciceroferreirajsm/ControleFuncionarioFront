@@ -17,9 +17,12 @@ const ListagemFuncionarios = () => {
     }
   }, [navigate]);
 
+  const urlDocker = "https://localhost:65124/api/Funcionario";
+  const url = "https://localhost:7140/api/Funcionario";
+
   const fetchFuncionarios = (token) => {
     setLoading(true);
-    fetch("https://localhost:7140/api/Funcionario", {
+    fetch(urlDocker, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +57,9 @@ const ListagemFuncionarios = () => {
     }
     if (window.confirm("Tem certeza que deseja excluir este funcionário?")) {
       setLoading(true);
-      fetch(`https://localhost:7140/api/Funcionario/${id}`, {
+      const urlDocker = `https://localhost:65124/api/Funcionario/${id}`;
+      const url = `https://localhost:7140/api/Funcionario/${id}`;
+      fetch(urlDocker, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,

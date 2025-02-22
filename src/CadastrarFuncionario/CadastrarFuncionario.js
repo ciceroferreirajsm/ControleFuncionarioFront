@@ -91,7 +91,9 @@ function App() {
     }
   
     try {
-      const response = await fetch("https://localhost:7140/api/Funcionario", {
+      const urlDocker = "https://localhost:65124/api/Funcionario";
+      const url = "https://localhost:7140/api/Funcionario";
+      const response = await fetch(urlDocker, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
