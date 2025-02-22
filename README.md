@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Controle Funcionario
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositório contém o frontend e backend para o gerenciamento de funcionários. A aplicação permite que os usuários se registrem, façam login, e gerenciem informações de funcionários com funcionalidades de adicionar, listar, atualizar e deletar.
 
-## Available Scripts
+## Tecnologias Utilizadas
 
-In the project directory, you can run:
+### Backend:
+- **ASP.NET Core**: Framework para desenvolvimento de APIs RESTful.
+- **JWT**: Para autenticação baseada em token.
+- **Entity Framework Core**: ORM para interação com o banco de dados.
+- **SQL Server**: Banco de dados relacional.
 
-### `npm start`
+### Frontend:
+- **React**: Framework JavaScript para construir interfaces de usuário.
+- **React Router**: Biblioteca para roteamento entre páginas.
+- **Axios**: Cliente HTTP para interagir com o backend.
+- **JWT (JSON Web Tokens)**: Utilizado para autenticação de usuários.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Funcionalidades do Backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+O backend oferece uma API RESTful para gerenciamento de usuários e funcionários.
 
-### `npm test`
+### 1. **Login**
+- **Rota de backend**: `/api/login/logar`
+  - Método: POST
+  - Payload:
+    ```json
+    {
+      "email": "user@example.com",
+      "senha": "senha123"
+    }
+    ```
+- **Rota de registro**: `/api/login/registrar`
+  - Método: POST
+  - Payload:
+    ```json
+    {
+      "nome": "Funcionario Nome",
+      "email": "user@example.com",
+      "senha": "senha123"
+    }
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. **Funcionario**
+- **Registrar Funcionario**
+  - **Rota de backend**: `/api/funcionario/registrar`
+  - Método: POST
+  - Payload:
+    ```json
+    {
+      "nome": "Nome do Funcionario",
+      "sobrenome": "Sobrenome",
+      "email": "email@exemplo.com",
+      "cargo": "Cargo",
+      "telefone": "1234567890",
+      "gestor": true,
+      "documento": "123456789",
+      "senha": "senha123",
+      "dt_nascimento": "1990-01-01",
+      "permissao": "admin"
+    }
+    ```
 
-### `npm run build`
+- **Listar Funcionarios**
+  - **Rota de backend**: `/api/funcionario`
+  - Método: GET
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Detalhes do Funcionario**
+  - **Rota de backend**: `/api/funcionario/{id}`
+  - Método: GET
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Atualizar Funcionario**
+  - **Rota de backend**: `/api/funcionario/{id}`
+  - Método: PUT
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Deletar Funcionario**
+  - **Rota de backend**: `/api/funcionario/{id}`
+  - Método: DELETE
 
-### `npm run eject`
+## Estrutura do Projeto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Frontend - Controle Funcionario
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Instalação
 
-## Learn More
+1. **Clone o repositório**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/ciceroferreirajsm/ControleFuncionarioFront.git
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_JWT_SECRET=seu_token_secreto_aqui
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+import axios from 'axios';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+// Obtendo o token do localStorage
+const token = localStorage.getItem('token');
 
-### Deployment
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+});
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+// Exemplo de requisição GET para listar funcionários
+axiosInstance.get('/funcionario')
+  .then(response => console.log(response.data))
+  .catch(error => console.error(error));
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
