@@ -146,6 +146,7 @@ function App() {
             name="nome"
             value={formData.nome}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -155,6 +156,7 @@ function App() {
             name="sobrenome"
             value={formData.sobrenome}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -164,6 +166,7 @@ function App() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
